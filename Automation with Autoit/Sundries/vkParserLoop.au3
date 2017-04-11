@@ -1,19 +1,18 @@
 #include <File.au3>
 #include <Array.au3>
-#include <IE.au3>
+;#include <VK_API_New.au3>
+#include <VK_Desktop_API.au3>
 
 $sFile = FileOpen("C:/urls.txt")
 
-while 1
+$vklogin = "maximmagnus1@mail.ru"
+$vkpass = "magnus92"
 
-	if @error = -1 Then ExitLoop
+_vAPI_OAuth2($vklogin,$vkpass)
 
-	$sURL = FileReadLine($sFile)
+$return = _vAPI_GETMethod("groups.getById", "group_ids=tnull&fields=can_post")
+_ArrayDisplay($return,"GGG")
 
-	$IEBrowser = _IECreate($sURL)
-	Sleep(4000)
 
-	$sHTMLBody = _IEBodyReadHTML($IEBrowser)
-	if (StringInStr("Написать сообщение</button>", $sHTMLBody) Then
-	$regSearch = StringInStr("Написать сообщение</button>", $sHTMLBody
+
 
